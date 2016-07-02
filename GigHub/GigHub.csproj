@@ -213,6 +213,10 @@
     <Compile Include="Migrations\201607021015217_CorrectDBSettingswithAttributes.Designer.cs">
       <DependentUpon>201607021015217_CorrectDBSettingswithAttributes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607021022344_PopulateGenresToDatabase.cs" />
+    <Compile Include="Migrations\201607021022344_PopulateGenresToDatabase.Designer.cs">
+      <DependentUpon>201607021022344_PopulateGenresToDatabase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -304,6 +308,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607021015217_CorrectDBSettingswithAttributes.resx">
       <DependentUpon>201607021015217_CorrectDBSettingswithAttributes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607021022344_PopulateGenresToDatabase.resx">
+      <DependentUpon>201607021022344_PopulateGenresToDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
