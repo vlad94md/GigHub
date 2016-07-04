@@ -218,6 +218,10 @@
     <Compile Include="Migrations\201607021022344_PopulateGenresToDatabase.Designer.cs">
       <DependentUpon>201607021022344_PopulateGenresToDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607030854515_AddForeighnKeyPropsToGig.cs" />
+    <Compile Include="Migrations\201607030854515_AddForeighnKeyPropsToGig.Designer.cs">
+      <DependentUpon>201607030854515_AddForeighnKeyPropsToGig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -227,6 +231,8 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\Attributes\FutureDate.cs" />
+    <Compile Include="ViewModels\Attributes\ValidTime.cs" />
     <Compile Include="ViewModels\GigFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -314,6 +320,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607021022344_PopulateGenresToDatabase.resx">
       <DependentUpon>201607021022344_PopulateGenresToDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607030854515_AddForeighnKeyPropsToGig.resx">
+      <DependentUpon>201607030854515_AddForeighnKeyPropsToGig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
