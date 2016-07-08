@@ -24,6 +24,12 @@ textarea {
 }
 
 
+span.field-validation-error{
+    color: red;
+    font-weight: bold;
+}
+
+
 /* Bootstrap overrides*/
 .navbar-inverse {
     background-color: #2ecc71;

@@ -10,7 +10,7 @@
 @using (Html.BeginForm("Create", "Gigs"))
 {
     @Html.AntiForgeryToken()
-
+    <p class="alert alert-info">All fields are <strong>required</strong></p>
     <div class="form-group">
         @Html.LabelFor(x => x.Venue)
         @Html.TextBoxFor(x => x.Venue, new { @class = "form-control" })
@@ -19,14 +19,14 @@
 
     <div class="form-group">
         @Html.LabelFor(x => x.Date)
-        @Html.TextBoxFor(x => x.Date, new { @class = "form-control" })
+        @Html.TextBoxFor(x => x.Date, new { @class = "form-control", placeholder = "eg. 01/12/2015"})
         @Html.ValidationMessageFor(x => x.Date)
 
     </div>
 
     <div class="form-group">
         @Html.LabelFor(x => x.Time)
-        @Html.TextBoxFor(x => x.Time, new {@class = "form-control"})
+        @Html.TextBoxFor(x => x.Time, new {@class = "form-control", placeholder = "eg. 19:00" })
         @Html.ValidationMessageFor(x => x.Time)
 
     </div>
