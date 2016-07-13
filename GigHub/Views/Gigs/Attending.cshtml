@@ -1,0 +1,11 @@
+﻿@using System.Web.UI.WebControls
+@model GigHub.ViewModels.GigsViewModel
+@{
+    ViewBag.Title = "Attending";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Attending:</h2>
+
+
+@Html.Partial("Gigs", @Model)
