@@ -70,6 +70,11 @@ span.field-validation-error{
     background-color: rgba(7, 125, 57, 0.38);
 }
 
+.navbar-inverse .navbar-nav>.dropdown>a .caret {
+    border-top-color: #fff;
+    border-bottom-color: #999;
+}
+
 .dropdown-menu {
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -168,4 +173,13 @@ h6,
 
 .gigs > li .details .genre {
     font-size: 15px;
+}
+
+.gigs > li .actions {
+    font-size: 15px;
+    display: none;
+}
+
+.gigs > li:hover .actions{
+    display: block;
 }

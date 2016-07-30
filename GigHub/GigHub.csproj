@@ -209,10 +209,17 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\FollowingController.cs" />
+    <Compile Include="Controllers\Api\GenreDto.cs" />
+    <Compile Include="Controllers\Api\GigDto.cs" />
+    <Compile Include="Controllers\Api\GigsController.cs" />
+    <Compile Include="Controllers\Api\NotificationController.cs" />
+    <Compile Include="Controllers\Api\NotificationDto.cs" />
+    <Compile Include="Controllers\Api\UserDto.cs" />
+    <Compile Include="Controllers\ArtistController.cs" />
+    <Compile Include="Controllers\Api\FollowingController.cs" />
     <Compile Include="Dtos\FollowingDto.cs" />
     <Compile Include="Dtos\AttendanceDto.cs" />
-    <Compile Include="Controllers\AttendancesController.cs" />
+    <Compile Include="Controllers\Api\AttendancesController.cs" />
     <Compile Include="Controllers\GigsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -251,9 +258,24 @@
     <Compile Include="Migrations\201607130736279_addFollowings.Designer.cs">
       <DependentUpon>201607130736279_addFollowings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607181401582_AddIsCancelToGig.cs" />
+    <Compile Include="Migrations\201607181401582_AddIsCancelToGig.Designer.cs">
+      <DependentUpon>201607181401582_AddIsCancelToGig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607201433459_AddNotifications.cs" />
+    <Compile Include="Migrations\201607201433459_AddNotifications.Designer.cs">
+      <DependentUpon>201607201433459_AddNotifications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607241614126_SmallChangeToUser.cs" />
+    <Compile Include="Migrations\201607241614126_SmallChangeToUser.Designer.cs">
+      <DependentUpon>201607241614126_SmallChangeToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Attendance.cs" />
     <Compile Include="Models\Following.cs" />
+    <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\NotificationType.cs" />
+    <Compile Include="Models\UserNotification.cs" />
     <Compile Include="ViewModels\AccountViewModels\SendCodeViewModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="ViewModels\AccountViewModels\ExternalLoginConfirmationViewModel.cs" />
@@ -284,6 +306,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -338,9 +361,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Gigs\Create.cshtml" />
+    <Content Include="Views\Gigs\GigForm.cshtml" />
     <Content Include="Views\Gigs\Attending.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Artist\Following.cshtml" />
+    <Content Include="Views\Gigs\Mine.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -377,6 +402,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607130736279_addFollowings.resx">
       <DependentUpon>201607130736279_addFollowings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607181401582_AddIsCancelToGig.resx">
+      <DependentUpon>201607181401582_AddIsCancelToGig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607201433459_AddNotifications.resx">
+      <DependentUpon>201607201433459_AddNotifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607241614126_SmallChangeToUser.resx">
+      <DependentUpon>201607241614126_SmallChangeToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -7,3 +7,33 @@
 
 
 @Html.Partial("Gigs", @Model)
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $(".js-toggle-attendance").click(function(e) {
+                var button = $(e.target);
+                $.post("/api/attendances", { gigId: button.attr("data-gig-id") })
+                    .done(function() {
+                        button.removeClass("btn-default").addClass("btn-info").text("I'm In!");
+                    })
+                    .fail(function() {
+                        alert("Something wrong!");
+                    });
+            });
+
+            $(".js-toggle-follow").click(function(e) {
+                var link = $(e.target);
+                $.post("/api/following", { followeeId: link.attr("data-user-id") })
+                    .done(function() {
+                        link.text("Following");
+                    })
+                    .fail(function() {
+                        alert("Something wrong!");
+                    });
+            });
+        });
+    </script>
+}
