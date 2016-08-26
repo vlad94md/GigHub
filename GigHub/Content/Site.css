@@ -24,7 +24,7 @@ textarea {
 }
 
 
-span.field-validation-error{
+span.field-validation-error {
     color: red;
     font-weight: bold;
 }
@@ -56,24 +56,36 @@ span.field-validation-error{
     border-color: #2ecc71;
 }
 
-.navbar-inverse .navbar-nav > li > a {
-    color: #fff;
-}
+    .navbar-inverse .navbar-nav > li > a {
+        color: #fff;
+    }
 
-.navbar-inverse .navbar-brand {
-    color: #fff;
-    font-weight: 700;
-}
+    .navbar-inverse .navbar-brand {
+        color: #fff;
+        font-weight: 700;
+    }
 
-.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
-    color: #ffffff;
-    background-color: rgba(7, 125, 57, 0.38);
-}
+    .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+        color: #ffffff;
+        background-color: rgba(7, 125, 57, 0.38);
+    }
 
-.navbar-inverse .navbar-nav>.dropdown>a .caret {
-    border-top-color: #fff;
-    border-bottom-color: #999;
-}
+    .navbar-inverse .navbar-nav > .dropdown > a .caret {
+        border-top-color: #fff;
+        border-bottom-color: #999;
+    }
+
+    .navbar-inverse .navbar-nav .notifications {
+        position: relative;
+    }
+
+        .navbar-inverse .navbar-nav .notifications .badge {
+            position: absolute;
+            top: 8px;
+            right: 0px;
+            color: white;
+            background: #056f32;
+        }
 
 .dropdown-menu {
     -webkit-box-shadow: none;
@@ -81,8 +93,8 @@ span.field-validation-error{
 }
 
 body {
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 17px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
 }
 
 h1,
@@ -97,13 +109,12 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Raleway", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Raleway", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 
 .form-group {
     margin-bottom: 20px;
-
 }
 
 .form-control {
@@ -130,56 +141,56 @@ h6,
     list-style: none;
 }
 
-.gigs > li {
-    position: relative;
-    margin-bottom: 30px;
-}
+    .gigs > li {
+        position: relative;
+        margin-bottom: 30px;
+    }
 
-.gigs > li .date {
-    background: red;
-    color: white;
-    text-align: center;
-    width: 70px;
-    -ms-border-radius: 8px;
-    border-radius: 8px;
-}
+        .gigs > li .date {
+            background: red;
+            color: white;
+            text-align: center;
+            width: 70px;
+            -ms-border-radius: 8px;
+            border-radius: 8px;
+        }
 
-.gigs > li .date .month{
-    text-transform: uppercase;
-    font-size: 15px;
-    font-weight: bold;
-    padding: 5px;
-}
+            .gigs > li .date .month {
+                text-transform: uppercase;
+                font-size: 15px;
+                font-weight: bold;
+                padding: 5px;
+            }
 
-.gigs > li .date .day{
-    background: #fff8dc;
-    color: #333;
-    text-transform: uppercase;
-    font-size: 15px;
-    font-weight: bold;
-    padding: 5px;
-}
+            .gigs > li .date .day {
+                background: #fff8dc;
+                color: #333;
+                text-transform: uppercase;
+                font-size: 15px;
+                font-weight: bold;
+                padding: 5px;
+            }
 
-.gigs > li .details {
-    position: absolute;
-    top: 0;
-    left: 100px;
-}
+        .gigs > li .details {
+            position: absolute;
+            top: 0;
+            left: 100px;
+        }
 
-.gigs > li .details .artist {
-    font-weight: bold;
-    display: block;
-}
+            .gigs > li .details .artist {
+                font-weight: bold;
+                display: block;
+            }
 
-.gigs > li .details .genre {
-    font-size: 15px;
-}
+            .gigs > li .details .genre {
+                font-size: 15px;
+            }
 
-.gigs > li .actions {
-    font-size: 15px;
-    display: none;
-}
+        .gigs > li .actions {
+            font-size: 15px;
+            display: none;
+        }
 
-.gigs > li:hover .actions{
-    display: block;
-}
+        .gigs > li:hover .actions {
+            display: block;
+        }

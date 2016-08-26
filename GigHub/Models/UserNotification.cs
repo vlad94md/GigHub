@@ -38,6 +38,7 @@ namespace GigHub.Models
 
             ApplicationUser = user;
             Notification = notification;
+            UserId = user.Id;
         }
     }
 }
