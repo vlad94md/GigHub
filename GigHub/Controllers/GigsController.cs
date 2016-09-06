@@ -68,11 +68,6 @@ namespace GigHub.Controllers
             var userId = User.Identity.GetUserId();
             var gig = _context.Gigs.Single(g => g.Id == viewModel.Id && g.ArtistId == userId);
 
-            //gig.GenreId = ;
-            //gig.ArtistId = User.Identity.GetUserId();
-            //gig.Venue = ;
-            //gig.DateTime = viewModel.GetDateTime();
-
             gig.Update(viewModel.Venue, viewModel.Genre);
 ;   
            _context.SaveChanges();
@@ -111,6 +106,12 @@ namespace GigHub.Controllers
                 .ToList();
 
             return View(gigs);
+        }
+
+        [HttpPost]
+        public ActionResult Search(GigsViewModel viewModel)
+        {
+            return RedirectToAction("Index", "Home", new { querry = viewModel.SearchTerm });
         }
 
         public ActionResult Attending()
