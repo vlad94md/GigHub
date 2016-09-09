@@ -17,13 +17,13 @@ namespace GigHub.Controllers.Api
         }
 
         [HttpDelete]
-        public IHttpActionResult Cancel(int id)
+        public IHttpActionResult Cancel(int gigId)
         {
             string userId = User.Identity.GetUserId();
 
             var gig = _context.Gigs
                 .Include(a => a.Attendacnces.Select(x => x.Attendee))
-                .Single(g => g.Id == id && g.ArtistId == userId);
+                .Single(g => g.Id == gigId && g.ArtistId == userId);
 
             if (gig.IsCancel)
             {
@@ -34,7 +34,7 @@ namespace GigHub.Controllers.Api
 
             _context.SaveChanges();
 
-            return Ok();
+            return Ok(gigId);
         }
     }
 }

@@ -38,7 +38,19 @@ span.field-validation-error {
 .voffset30 {
   margin-top: 30px;
 }
+.leftoffset35 {
+  margin-left: 35px;
+}
 /* Bootstrap overrides*/
+.btn-gig {
+  min-width: 90px;
+}
+.name-gig {
+  min-width: 400px;
+}
+.genre-gig {
+  max-width: 400px;
+}
 .popover {
   box-shadow: none;
   -webkit-box-shadow: none;

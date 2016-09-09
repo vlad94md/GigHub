@@ -8,7 +8,6 @@ using System.Web.Mvc;
 
 namespace GigHub.Controllers
 {
-    [Authorize]
     public class GigsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -18,6 +17,36 @@ namespace GigHub.Controllers
             _context = new ApplicationDbContext();
         }
 
+        public ActionResult Details(int id)
+        {
+            var gig = _context.Gigs
+                .Where(g => g.Id == id)
+                .Include(a => a.Artist)
+                .FirstOrDefault();
+
+            if (gig == null)
+                return HttpNotFound();
+
+            var viewModel = new GigDetailsViewModel()
+            {
+                Gig = gig,
+            };
+
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = User.Identity.GetUserId();
+
+                viewModel.isAttending = _context.Attendances
+                    .Any(a => a.GigId == gig.Id && a.AttendeeId == userId);
+
+                viewModel.isFollowing = _context.Followings
+                    .Any(a => a.FollowerId == userId && a.FolloweeId == gig.ArtistId);
+            }
+
+            return View("Details", viewModel);
+        }
+
+        [Authorize]
         public ActionResult Create()
         {
             var viewModel = new GigFormViewModel()
@@ -28,6 +57,7 @@ namespace GigHub.Controllers
             return View("GigForm", viewModel);
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(GigFormViewModel viewModel)
@@ -55,6 +85,7 @@ namespace GigHub.Controllers
             return RedirectToAction("Mine", "Gigs");
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Update(GigFormViewModel viewModel)
@@ -75,6 +106,7 @@ namespace GigHub.Controllers
             return RedirectToAction("Mine", "Gigs");
         }
 
+        [Authorize]
         public ActionResult Edit(int gigId)
         {
 
@@ -97,6 +129,7 @@ namespace GigHub.Controllers
             return View("GigForm", viewModel);
         }
 
+        [Authorize]
         public ActionResult Mine()
         {
             var userId = User.Identity.GetUserId();
@@ -114,6 +147,7 @@ namespace GigHub.Controllers
             return RedirectToAction("Index", "Home", new { querry = viewModel.SearchTerm });
         }
 
+        [Authorize]
         public ActionResult Attending()
         {
             var userId = User.Identity.GetUserId();
@@ -125,10 +159,22 @@ namespace GigHub.Controllers
                 .Include("Genre")
                 .ToList();
 
+            var attendances = _context.Attendances
+                .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
+                .ToList()
+                .ToLookup(a => a.GigId);
+
+            var followees = _context.Followings
+                .Where(f => f.FollowerId == userId)
+                .ToList()
+                .ToLookup(x => x.FolloweeId);
+
             var viewModel = new GigsViewModel()
             {
                 UpcomingGigs = gigs,
-                ShowActions = User.Identity.IsAuthenticated
+                ShowActions = User.Identity.IsAuthenticated,
+                Attendacnes = attendances,
+                Followees = followees
             };
 
             return View(viewModel);
