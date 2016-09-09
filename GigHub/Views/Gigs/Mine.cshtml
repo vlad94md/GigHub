@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>My Upcoming Gigs:</h2>
+<h2 class="leftoffset35">My Upcoming Gigs:</h2>
 
 <ul class="gigs voffset30">
     @foreach (var gig in Model)
@@ -30,7 +30,7 @@
                         Edit
                     </a>
                     <span>|</span>
-                    <a href="#" class="js-cancel-gig" data-gig-id="@gig.Id">
+                    <a href="#" class="js-cancel-gig" data-gig-gigId="@gig.Id">
                         Cancel
                     </a>
                 </div>

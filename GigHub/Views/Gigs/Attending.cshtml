@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Attending:</h2>
+<h2 class="leftoffset35">Attending:</h2>
 
 
 @Html.Partial("Gigs", @Model)
@@ -16,14 +16,33 @@
         $(document).ready(function () {
             $(".js-toggle-attendance").click(function (e) {
                 var button = $(e.target);
-                $.post("/api/attendances", { gigId: button.attr("data-gig-id") })
-                    .done(function () {
-                        button.removeClass("btn-default").addClass("btn-info").text("I'm In!");
-                    })
-                    .fail(function () {
-                        alert("Something wrong!");
-                    });
+
+                if (button.hasClass("btn-default")) {
+
+                    $.post("/api/attendances", { gigId: button.attr("data-gig-id") })
+                        .done(function() {
+                            button.removeClass("btn-default").addClass("btn-info").text("I'm In!");
+                        })
+                        .fail(function() {
+                            alert("Something wrong!");
+                        });
+
+                } else {
+                    $.ajax({
+                            url: "/api/attendaces/" + button.attr("data-gig-id"),
+                            method: "DELETE"
+                        })
+                        .done(function() {
+                            button.removeClass("btn-info")
+                                .addClass("btn-default")
+                                .text("Going?");
+                        })
+                        .fail(function() {
+                            alert("Something wrong");
+                        });
+                }
             });
+
 
             $(".js-toggle-follow").click(function (e) {
                 var link = $(e.target);

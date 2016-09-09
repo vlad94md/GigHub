@@ -3,53 +3,88 @@
     ViewBag.Title = "Index";
 }
 
-@using (Html.BeginForm("Search", "Gigs"))
-{
-    <div class="form-group">
-        <div id="searchGigs" class="input-group">
-            @Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control", @placeholder = "Search by genre, artist..." })
+<div id="search" class="leftoffset35 voffset30">
+    @using (Html.BeginForm("Search", "Gigs"))
+    {
+        <div class="form-group">
+            <div id="searchGigs" class="input-group">
+                @Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control", @placeholder = "Search by genre, artist..." })
 
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="submit">
-                    <i class="glyphicon glyphicon-search"></i>
-                </button>
-            </span>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </span>
+            </div>
         </div>
-    </div>
-}
+    }
+</div>
+
 
 <ul class="gigs voffset30">
     @foreach (var gig in Model.UpcomingGigs)
     {
         <li>
-            <div class="date">
-                <div class="month">
-                    @gig.DateTime.ToString("MMM")
+            <div class="gig-item">
+                <div class="date">
+                    <div class="month">
+                        @gig.DateTime.ToString("MMM")
+                    </div>
+                    <div class="day">
+                        @gig.DateTime.ToString("d ")
+                    </div>
                 </div>
-                <div class="day">
-                    @gig.DateTime.ToString("d ")
+                <div class="details">
+                    <div class="row name-gig">
+                        <span class="artist col-lg-8">
+                            @if (@gig.IsCancel)
+                            {
+                                <span class="label label-warning">Canceled</span>
+                            }
+                            <a href="@Url.Action("Details", "Gigs", new {id = @gig.Id})">
+                                @gig.Artist.Name
+                            </a>
+                        </span>
+                        <div class="col-lg-4">
+                            @if (Model.ShowActions)
+                            {
+                                if (Model.Followees.Contains(gig.ArtistId))
+                                {
+                                    <button data-user-id="@gig.ArtistId" class="btn btn-link btn-gig btn-sm pull-right js-toggle-follow">Unfollow</button>
+                                }
+                                else
+                                {
+                                    <button data-user-id="@gig.ArtistId" class="btn btn-link btn-sm btn-gig pull-right js-toggle-follow">Follow</button>
+                                }
+                            }
+                        </div>
+                    </div>
+
+                    <div class="row genre-gig">
+                        <span class="genre col-lg-8">
+                            @gig.Genre.Name
+                        </span>
+                        @if (Model.ShowActions && !@gig.IsCancel)
+                        {
+                            <div class="col-lg-4">
+                                @if (@Model.Attendacnes.Contains(gig.Id))
+                                {
+                                    <button data-gig-gigId="@gig.Id" class="btn btn-info btn-sm btn-gig pull-right js-toggle-attendance">
+                                        I'm In
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button data-gig-id="@gig.Id" class="btn btn-default btn-sm btn-gig pull-right js-toggle-attendance">
+                                        Going?
+                                    </button>
+                                }
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
-            <div class="details">
-                <span class="artist">
-                    @if (@gig.IsCancel)
-                    {
-                        <span class="label label-warning">Canceled</span>
-                    }
-                    @gig.Artist.Name
-                    @if (Model.ShowActions)
-                    {
-                        <button data-user-id="@gig.ArtistId" class="btn btn-link btn-sm pull-right js-toggle-follow">Follow</button>
-                    }
-                </span>
-                <span class="genre">
-                    @gig.Genre.Name
-                </span>
-                @if (Model.ShowActions && !@gig.IsCancel)
-                {
-                    <button data-gig-id="@gig.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Going?</button>
-                }
-            </div>
+            <hr/>
         </li>
     }
 </ul>
