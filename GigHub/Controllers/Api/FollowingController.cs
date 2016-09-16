@@ -16,7 +16,7 @@ namespace GigHub.Controllers.Api
             _context = new ApplicationDbContext();
         }
 
-        [HttpPost]
+        [HttpGet]
         public IHttpActionResult Follow(FollowingDto dto)
         {
             var userId = User.Identity.GetUserId();
@@ -38,7 +38,7 @@ namespace GigHub.Controllers.Api
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpGet]
         public IHttpActionResult Unfollow(string followeeId)
         {
             var userId = User.Identity.GetUserId();
