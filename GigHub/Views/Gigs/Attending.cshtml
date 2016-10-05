@@ -12,48 +12,12 @@
 
 @section scripts
 {
-    <script>
+<script>
         $(document).ready(function () {
-            $(".js-toggle-attendance").click(function (e) {
-                var button = $(e.target);
+            var container = "#container";
 
-                if (button.hasClass("btn-default")) {
-
-                    $.post("/api/attendances", { gigId: button.attr("data-gig-id") })
-                        .done(function() {
-                            button.removeClass("btn-default").addClass("btn-info").text("I'm In!");
-                        })
-                        .fail(function() {
-                            alert("Something wrong!");
-                        });
-
-                } else {
-                    $.ajax({
-                            url: "/api/attendaces/" + button.attr("data-gig-id"),
-                            method: "DELETE"
-                        })
-                        .done(function() {
-                            button.removeClass("btn-info")
-                                .addClass("btn-default")
-                                .text("Going?");
-                        })
-                        .fail(function() {
-                            alert("Something wrong");
-                        });
-                }
-            });
-
-
-            $(".js-toggle-follow").click(function (e) {
-                var link = $(e.target);
-                $.post("/api/following", { followeeId: link.attr("data-user-id") })
-                    .done(function () {
-                        link.text("Following");
-                    })
-                    .fail(function () {
-                        alert("Something wrong!");
-                    });
-            });
+            GigsController.init(container);
+            FollowController.init(container);
         });
-    </script>
+</script>
 }
