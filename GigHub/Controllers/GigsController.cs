@@ -1,4 +1,5 @@
 ﻿using GigHub.Models;
+using GigHub.Repositories;
 using GigHub.ViewModels;
 using Microsoft.AspNet.Identity;
 using System;
@@ -11,10 +12,16 @@ namespace GigHub.Controllers
     public class GigsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private AttendanceRepository _attendaceRepository;
+        private GigRepository _gigRepository;
+        private FollowingRepository _followingRepository;
 
         public GigsController()
         {
             _context = new ApplicationDbContext();
+            _attendaceRepository = new AttendanceRepository(_context);
+            _gigRepository = new GigRepository(_context);
+            _followingRepository = new FollowingRepository(_context);
         }
 
         public ActionResult Details(int id)
@@ -96,8 +103,13 @@ namespace GigHub.Controllers
                 return View("GigForm", viewModel);
             }
 
-            var userId = User.Identity.GetUserId();
-            var gig = _context.Gigs.Single(g => g.Id == viewModel.Id && g.ArtistId == userId);
+            var gig = _gigRepository.GetGigWithAttendanees(viewModel.Id);
+
+            if (gig == null)
+                return HttpNotFound();
+
+            if (gig.ArtistId != User.Identity.GetUserId())
+                return new HttpUnauthorizedResult();
 
             gig.Update(viewModel.Venue, viewModel.Genre);
 ;   
@@ -152,29 +164,12 @@ namespace GigHub.Controllers
         {
             var userId = User.Identity.GetUserId();
 
-            var gigs = _context.Attendances
-                .Where(a => a.AttendeeId == userId)
-                .Select(a => a.Gig)
-                .Include("Artist")
-                .Include("Genre")
-                .ToList();
-
-            var attendances = _context.Attendances
-                .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
-                .ToList()
-                .ToLookup(a => a.GigId);
-
-            var followees = _context.Followings
-                .Where(f => f.FollowerId == userId)
-                .ToList()
-                .ToLookup(x => x.FolloweeId);
-
             var viewModel = new GigsViewModel()
             {
-                UpcomingGigs = gigs,
+                UpcomingGigs = _gigRepository.GetGigsUserAttending(userId),
                 ShowActions = User.Identity.IsAuthenticated,
-                Attendacnes = attendances,
-                Followees = followees
+                Attendacnes = _attendaceRepository.GetFutureAttendances(userId).ToLookup(a => a.GigId),
+                Followees = _followingRepository.GetFollowingsWhereUserIsFollower(userId).ToLookup(x => x.FolloweeId)
             };
 
             return View(viewModel);
