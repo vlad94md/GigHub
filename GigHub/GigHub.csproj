@@ -283,6 +283,7 @@
     <Compile Include="Models\UserNotification.cs" />
     <Compile Include="Repositories\AttendanceRepository.cs" />
     <Compile Include="Repositories\FollowingRepository.cs" />
+    <Compile Include="Repositories\GenreRepository.cs" />
     <Compile Include="Repositories\GigRepository.cs" />
     <Compile Include="ViewModels\AccountViewModels\SendCodeViewModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
