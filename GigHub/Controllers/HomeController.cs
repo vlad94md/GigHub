@@ -1,57 +1,45 @@
-﻿using GigHub.Models;
-using GigHub.ViewModels;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using System;
 using System.Linq;
 using System.Web.Mvc;
+using GigHub.Core;
+using GigHub.Core.Models;
+using GigHub.Core.ViewModels;
+using GigHub.Persistance;
 
 namespace GigHub.Controllers
 {
     public class HomeController : Controller
     {
-        private ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController()
+        public HomeController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();;
+            _unitOfWork = unitOfWork;
         }
 
         public ActionResult Index(string querry = null)
         {
-            var upcomingGigs = _context.Gigs
-                .Include("Artist")
-                .Include("Genre")
-                .Where(g => g.DateTime > DateTime.Now);
-
+            var upcomingGigs = _unitOfWork.Gigs.GetAllUpcommingGigs(); //TODO: Exclude My gigs
 
             if (!String.IsNullOrWhiteSpace(querry))
             {
                 upcomingGigs = upcomingGigs
                     .Where(g =>
-                        g.Artist.Name.Contains(querry) ||
-                        g.Genre.Name.Contains(querry) ||
-                        g.Venue.Contains(querry));
+                        g.Artist.Name.ToLower().Contains(querry.ToLower()) ||
+                        g.Genre.Name.ToLower().Contains(querry.ToLower()) ||
+                        g.Venue.ToLower().Contains(querry.ToLower()));
             }
 
             var userId = User.Identity.GetUserId();
-
-            var attendances = _context.Attendances
-                .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
-                .ToList()
-                .ToLookup(a => a.GigId);
-
-            var followees = _context.Followings
-                .Where(f => f.FollowerId == userId)
-                .ToList()
-                .ToLookup(x => x.FolloweeId);
 
             var viewModel = new GigsViewModel()
             {
                 UpcomingGigs = upcomingGigs,
                 ShowActions = User.Identity.IsAuthenticated,
                 SearchTerm = querry,
-                Attendacnes = attendances,
-                Followees = followees
+                Attendacnes = _unitOfWork.Attendances.GetFutureAttendances(userId).ToLookup(g => g.GigId),
+                Followees = _unitOfWork.Followings.GetFollowingsWhereUserIsFollower(userId).ToLookup(x => x.FolloweeId)
             };
 
             return View(viewModel);
