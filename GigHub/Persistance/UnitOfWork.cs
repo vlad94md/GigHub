@@ -6,7 +6,7 @@ namespace GigHub.Persistance
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         public IGenreRepository Genres { get; set; }
         public IFollowingRepository Followings { get; set; }
         public IAttendanceRepository Attendances { get; set; }
