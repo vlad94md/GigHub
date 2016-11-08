@@ -13,11 +13,12 @@ namespace GigHub.Tests.Controllers.Api
     [TestClass]
     public class GigsControllerTests
     {
-        private readonly GigsController _controller;
-        private readonly Mock<IGigRepository> _mockRepository;
-        private readonly string _userId;
+        private GigsController _controller;
+        private Mock<IGigRepository> _mockRepository;
+        private string _userId;
 
-        public GigsControllerTests()
+        [TestInitialize]
+        public void TestInialize()
         {
             _mockRepository = new Mock<IGigRepository>();
 
@@ -53,13 +54,39 @@ namespace GigHub.Tests.Controllers.Api
         [TestMethod]
         public void Cancel_TryCancelAnotherUserGig_Unauthorized()
         {
-            var gig = new Gig() {ArtistId = _userId + "1"};
+            var gig = new Gig() { ArtistId = _userId + "1" };
 
             _mockRepository.Setup(r => r.GetGigWithAttendanees(1)).Returns(gig);
 
             var result = _controller.Cancel(1);
 
             result.Should().BeOfType<UnauthorizedResult>();
+        }
+
+        [TestMethod]
+        public void Cancel_OwnGig_ShouldReturnOk()
+        {
+            var gig = new Gig() { ArtistId = _userId };
+
+            _mockRepository.Setup(r => r.GetGigWithAttendanees(1)).Returns(gig);
+
+            var result = _controller.Cancel(1);
+
+            result.Should().BeOfType<OkResult>();
+        }
+
+        [TestMethod]
+        public void Cancel_Gig_ShouldReturnIsCanceledTrue()
+        {
+            var gig = new Gig() { ArtistId = _userId };
+
+            _mockRepository.Setup(r => r.GetGigWithAttendanees(1)).Returns(gig);
+
+            _controller.Cancel(1);
+
+            var result = gig.IsCancel;
+
+            result.Should().BeTrue();
         }
     }
 }
