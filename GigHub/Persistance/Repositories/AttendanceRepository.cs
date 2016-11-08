@@ -8,7 +8,7 @@ namespace GigHub.Persistance.Repositories
 {
     public class AttendanceRepository : IAttendanceRepository
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public AttendanceRepository(ApplicationDbContext context)
         {
@@ -26,6 +26,16 @@ namespace GigHub.Persistance.Repositories
             return _context.Attendances
                 .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
                 .ToList();
+        }
+
+        public Attendance Add(Attendance attendance)
+        {
+            return _context.Attendances.Add(attendance);
+        }
+
+        public Attendance Remove(Attendance attendance)
+        {
+            return _context.Attendances.Remove(attendance);
         }
     }
 }
