@@ -11,6 +11,8 @@ namespace GigHub.Persistance
         public IFollowingRepository Followings { get; set; }
         public IAttendanceRepository Attendances { get; set; }
         public IGigRepository Gigs { get; set; }
+        public INotificationRepository Notifications { get; set; }
+        public IUserNotificationRepository UserNotifications { get; set; }
 
         public UnitOfWork()
         {
@@ -19,6 +21,8 @@ namespace GigHub.Persistance
             Attendances = new AttendanceRepository(_context);
             Followings = new FollowingRepository(_context);
             Genres = new GenreRepository(_context);
+            Notifications = new NotificationRepository(_context);
+            UserNotifications = new UserNotificationRepository(_context);
         }
 
         public void Commit()

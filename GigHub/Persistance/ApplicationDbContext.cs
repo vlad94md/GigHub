@@ -1,11 +1,12 @@
-using System.Data.Entity;
+using GigHub.Core;
 using GigHub.Core.Models;
 using GigHub.Persistance.EntityConfigurations;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace GigHub.Persistance
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
         public DbSet<Gig> Gigs { get; set; }
         public DbSet<Genre> Genres { get; set; }

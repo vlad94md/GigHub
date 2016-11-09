@@ -2,7 +2,7 @@
 using System.Security.Principal;
 using System.Web.Http;
 
-namespace GigHub.Tests.Controllers.Extensions
+namespace GigHub.Tests.Extensions
 {
     public static class ApiControllerExtensions
     {

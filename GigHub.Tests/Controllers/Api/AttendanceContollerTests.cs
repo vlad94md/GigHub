@@ -1,14 +1,13 @@
-﻿using System;
-using System.Web.Http.Results;
-using FluentAssertions;
+﻿using FluentAssertions;
 using GigHub.Controllers.Api;
 using GigHub.Core;
 using GigHub.Core.Dtos;
 using GigHub.Core.Models;
 using GigHub.Core.Repositories;
-using GigHub.Tests.Controllers.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Web.Http.Results;
+using GigHub.Tests.Extensions;
 
 namespace GigHub.Tests.Controllers.Api
 {
@@ -36,31 +35,59 @@ namespace GigHub.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void Attend_AttendanceAlreadyExists_ShouldBadRequest()
+        public void Attend_AttendanceAlreadyExists_ReturnBadRequest()
         {
-            var attendanceDto = new Attendance();
-            attendanceDto.GigId = _gigId;
-            attendanceDto.AttendeeId = _userId;
+            var attendance = new Attendance();
+            attendance.GigId = _gigId;
+            attendance.AttendeeId = _userId;
 
-            _mockRepository.Setup(r => r.GetAttendance(_gigId, _userId)).Returns(attendanceDto);
+            _mockRepository.Setup(r => r.GetAttendance(_gigId, _userId)).Returns(attendance);
 
             var result = _controller.Attend(new AttendanceDto() {GigId = _gigId });
 
-            result.Should().BeOfType<BadRequestResult>();
+            result.Should().BeOfType<BadRequestErrorMessageResult>();
         }
 
         [TestMethod]
-        public void Attend_AttendanceNotExists_ShouldOk()
+        public void Attend_AttendanceNotExists_ReturnOk()
         {
-            var attendanceDto = new Attendance();
-            attendanceDto.GigId = _gigId;
-            attendanceDto.AttendeeId = _userId;
+            var attendance = new Attendance();
+            attendance.GigId = _gigId;
+            attendance.AttendeeId = _userId;
 
             _mockRepository.Setup(r => r.GetAttendance(_gigId, _userId)).Returns((Attendance) null);
 
             var result = _controller.Attend(new AttendanceDto() { GigId = _gigId });
 
             result.Should().BeOfType<OkResult>();
+        }
+
+        [TestMethod]
+        public void DeleteAttend_AttendanceExists_ReturndOk()
+        {
+            var attendance = new Attendance();
+            attendance.GigId = _gigId;
+            attendance.AttendeeId = _userId;
+
+            _mockRepository.Setup(r => r.GetAttendance(_gigId, _userId)).Returns(attendance);
+
+            var result = _controller.DeleteAttend(_gigId);
+
+            result.Should().BeOfType<OkResult>();
+        }
+
+        [TestMethod]
+        public void DeleteAttend_AttendanceNotExists_ReturnOk()
+        {
+            var attendance = new Attendance();
+            attendance.GigId = _gigId;
+            attendance.AttendeeId = _userId;
+
+            _mockRepository.Setup(r => r.GetAttendance(_gigId, _userId)).Returns((Attendance)null);
+
+            var result = _controller.DeleteAttend(_gigId);
+
+            result.Should().BeOfType<NotFoundResult>();
         }
 
     }

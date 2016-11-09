@@ -1,23 +1,24 @@
 ﻿using AutoMapper;
+using GigHub.Core;
+using GigHub.Core.Dtos;
+using GigHub.Core.Models;
+using GigHub.Persistance;
 using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
-using GigHub.Core.Dtos;
-using GigHub.Core.Models;
-using GigHub.Persistance;
 
 namespace GigHub.Controllers.Api
 {
     [Authorize]
     public class NotificationController : ApiController
     {
-        private ApplicationDbContext _context;
+        private IUnitOfWork _unitOfWork;
 
-        public NotificationController()
+        public NotificationController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
+            _unitOfWork = unitOfWork;
         }
 
         public IEnumerable<NotificationDto> GetNewNotifications()

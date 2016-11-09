@@ -259,6 +259,8 @@
     <Compile Include="Core\Repositories\IFollowingRepository.cs" />
     <Compile Include="Core\Repositories\IGenreRepository.cs" />
     <Compile Include="Core\Repositories\IGigRepository.cs" />
+    <Compile Include="Core\Repositories\INotificationRepository.cs" />
+    <Compile Include="Core\Repositories\IUserNotificationRepository.cs" />
     <Compile Include="Core\ViewModels\AccountViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Core\ViewModels\AccountViewModels\ExternalLoginListViewModel.cs" />
     <Compile Include="Core\ViewModels\AccountViewModels\ForgotPasswordViewModel.cs" />
@@ -290,6 +292,7 @@
     <Compile Include="Persistance\EntityConfigurations\GigConfiguration.cs" />
     <Compile Include="Persistance\EntityConfigurations\NotificationConfiguration.cs" />
     <Compile Include="Persistance\EntityConfigurations\UserNotificationConfiguration.cs" />
+    <Compile Include="Persistance\IApplicationDbContext.cs" />
     <Compile Include="Persistance\Migrations\201606292136419_InitialModel.cs" />
     <Compile Include="Persistance\Migrations\201606292136419_InitialModel.Designer.cs">
       <DependentUpon>201606292136419_InitialModel.cs</DependentUpon>

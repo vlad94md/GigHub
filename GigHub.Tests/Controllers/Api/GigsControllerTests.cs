@@ -3,10 +3,10 @@ using GigHub.Controllers.Api;
 using GigHub.Core;
 using GigHub.Core.Models;
 using GigHub.Core.Repositories;
-using GigHub.Tests.Controllers.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Web.Http.Results;
+using GigHub.Tests.Extensions;
 
 namespace GigHub.Tests.Controllers.Api
 {
@@ -72,7 +72,7 @@ namespace GigHub.Tests.Controllers.Api
 
             var result = _controller.Cancel(1);
 
-            result.Should().BeOfType<OkResult>();
+            result.Should().BeOfType<OkNegotiatedContentResult<int>>();
         }
 
         [TestMethod]
