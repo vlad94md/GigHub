@@ -8,13 +8,14 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
+using WebGrease.Css.Extensions;
 
 namespace GigHub.Controllers.Api
 {
     [Authorize]
     public class NotificationController : ApiController
     {
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         public NotificationController(IUnitOfWork unitOfWork)
         {
@@ -22,14 +23,9 @@ namespace GigHub.Controllers.Api
         }
 
         public IEnumerable<NotificationDto> GetNewNotifications()
-        {
+        {   
             string userId = User.Identity.GetUserId();
-            var notifications = _context.UserNotifications
-                .Where(n => n.UserId == userId && !n.IsRead)
-                .Select(n => n.Notification)
-                .Include(n => n.Gig.Artist)
-                .ToList();
-
+            var notifications = _unitOfWork.UserNotifications.GetNewNotificationsByUser(userId);
 
             return notifications.Select(Mapper.Map<Notification, NotificationDto>);
         }
@@ -38,14 +34,11 @@ namespace GigHub.Controllers.Api
         public IHttpActionResult MarkAsRead()
         {
             string userId = User.Identity.GetUserId();
-            var notifications = _context.UserNotifications
-                .Where(n => n.UserId == userId && !n.IsRead)
-                .ToList();
+            var notifications = _unitOfWork.UserNotifications.GetNewUserNotificationsByUser(userId);
 
             notifications.ForEach(x => x.Read());
 
-            _context.SaveChanges();
-
+            _unitOfWork.Commit();
 
             return Ok();
         }
