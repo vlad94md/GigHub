@@ -25,7 +25,7 @@ namespace GigHub.Controllers.Api
         public IEnumerable<NotificationDto> GetNewNotifications()
         {   
             string userId = User.Identity.GetUserId();
-            var notifications = _unitOfWork.UserNotifications.GetNewNotificationsByUser(userId);
+            var notifications = _unitOfWork.Notifications.GetNewNotificationsFor(userId);
 
             return notifications.Select(Mapper.Map<Notification, NotificationDto>);
         }
@@ -34,7 +34,7 @@ namespace GigHub.Controllers.Api
         public IHttpActionResult MarkAsRead()
         {
             string userId = User.Identity.GetUserId();
-            var notifications = _unitOfWork.UserNotifications.GetNewUserNotificationsByUser(userId);
+            var notifications = _unitOfWork.Notifications.GetNewUserNotificationsFor(userId);
 
             notifications.ForEach(x => x.Read());
 

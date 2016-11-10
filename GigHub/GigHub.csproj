@@ -259,7 +259,7 @@
     <Compile Include="Core\Repositories\IFollowingRepository.cs" />
     <Compile Include="Core\Repositories\IGenreRepository.cs" />
     <Compile Include="Core\Repositories\IGigRepository.cs" />
-    <Compile Include="Core\Repositories\IUserNotificationRepository.cs" />
+    <Compile Include="Core\Repositories\INotificationRepository.cs" />
     <Compile Include="Core\ViewModels\AccountViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Core\ViewModels\AccountViewModels\ExternalLoginListViewModel.cs" />
     <Compile Include="Core\ViewModels\AccountViewModels\ForgotPasswordViewModel.cs" />
@@ -342,7 +342,7 @@
     <Compile Include="Persistance\Repositories\FollowingRepository.cs" />
     <Compile Include="Persistance\Repositories\GenreRepository.cs" />
     <Compile Include="Persistance\Repositories\GigRepository.cs" />
-    <Compile Include="Persistance\Repositories\UserNotificationRepository.cs" />
+    <Compile Include="Persistance\Repositories\NotificationRepository.cs" />
     <Compile Include="Persistance\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

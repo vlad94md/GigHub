@@ -9,7 +9,7 @@ namespace GigHub.Core
         IAttendanceRepository Attendances { get; set; }
         IGigRepository Gigs { get; set; }
         //INotificationRepository Notifications { get; set; }
-        IUserNotificationRepository UserNotifications { get; set; }
+        INotificationRepository Notifications { get; set; }
         void Commit();
     }
 }

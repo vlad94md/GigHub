@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigHub", "GigHub\GigHub.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigHub.Tests", "GigHub.Tests\GigHub.Tests.csproj", "{60F33A04-44EC-436A-8FE7-B44E0631CAFA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigHub.IntegrationsTests", "GigHub.IntegrationsTests\GigHub.IntegrationsTests.csproj", "{8B990E04-87C1-412B-82FE-FD1B9BEEFBE8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{60F33A04-44EC-436A-8FE7-B44E0631CAFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60F33A04-44EC-436A-8FE7-B44E0631CAFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60F33A04-44EC-436A-8FE7-B44E0631CAFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B990E04-87C1-412B-82FE-FD1B9BEEFBE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B990E04-87C1-412B-82FE-FD1B9BEEFBE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B990E04-87C1-412B-82FE-FD1B9BEEFBE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B990E04-87C1-412B-82FE-FD1B9BEEFBE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
