@@ -13,9 +13,9 @@ namespace GigHub.Persistance
         public IGigRepository Gigs { get; set; }
         public INotificationRepository Notifications { get; set; }
 
-        public UnitOfWork()
+        public UnitOfWork(ApplicationDbContext context)
         {
-            _context = new ApplicationDbContext();
+            _context = context;
             Gigs = new GigRepository(_context);
             Attendances = new AttendanceRepository(_context);
             Followings = new FollowingRepository(_context);
