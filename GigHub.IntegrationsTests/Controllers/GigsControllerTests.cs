@@ -67,7 +67,7 @@ namespace GigHub.IntegrationsTests.Controllers
             var result = _controller.Update(new GigFormViewModel()
             {
                 Id = gig.Id,
-                Date = DateTime.Now.AddMonths(1).ToString("d MMM yyyy"),
+                Date = DateTime.Now.AddMonths(2).ToString("d MMM yyyy"),
                 Time = "20:00",
                 Venue = "Venue",
                 Genre = 2
@@ -75,7 +75,8 @@ namespace GigHub.IntegrationsTests.Controllers
 
             // Assert
             _context.Entry(gig).Reload();
-            gig.DateTime.Should().Be(DateTime.Now.AddMonths(1));
+            gig.DateTime.Month.Should().Be(DateTime.Now.AddMonths(2).Month);
+            gig.DateTime.ToString("HH:mm").Should().Be("20:00");
             gig.Venue.Should().Be("Venue");
             gig.GenreId.Should().Be(2);
         }

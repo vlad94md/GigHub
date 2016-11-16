@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace GigHub.Core.Models
@@ -42,13 +41,13 @@ namespace GigHub.Core.Models
             }
         }
 
-        public void Update(string venue, byte genre)
+        public void Update(string venue, byte genre, DateTime dateTime)
         {
             var notification = Notification.GigUpdated(this, DateTime, Venue);
 
             Venue = venue;
             GenreId = genre;
-            DateTime = DateTime.Now;
+            DateTime = dateTime;
 
             foreach (var user in Attendacnces.Select(x => x.Attendee))
             {

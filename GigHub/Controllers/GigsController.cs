@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNet.Identity;
-using System.Linq;
-using System.Web.Mvc;
-using GigHub.Core;
+﻿using GigHub.Core;
 using GigHub.Core.Models;
 using GigHub.Core.ViewModels;
-using GigHub.Persistance;
+using Microsoft.AspNet.Identity;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace GigHub.Controllers
 {
@@ -95,7 +94,7 @@ namespace GigHub.Controllers
             if (gig.ArtistId != User.Identity.GetUserId())
                 return new HttpUnauthorizedResult();
 
-            gig.Update(viewModel.Venue, viewModel.Genre);  
+            gig.Update(viewModel.Venue, viewModel.Genre, viewModel.GetDateTime());  
             _unitOfWork.Commit();
 
             return RedirectToAction("Mine", "Gigs");
